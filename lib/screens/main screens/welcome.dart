@@ -9,7 +9,6 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
       body: Center(
         child: Container(
           decoration: BoxDecoration(
@@ -58,7 +57,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   size: 45,
                 ),
                 label: Text(''),
-                color: Colors.purple[200],
+                color: Colors.transparent,
               )
             ],
           ),
