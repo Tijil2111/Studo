@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "112132009192",
+    "project_id": "tijil-s-studo",
+    "storage_bucket": "tijil-s-studo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112132009192:android:aac0b55713b83c7632ed5d",
+        "android_client_info": {
+          "package_name": "com.tijil.studo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112132009192-mjlsj5f0rqc3a50h4lthkm5pcl6ntbgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEieyoJ4RTnBQbkhaBbvnfIklxARjSHOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112132009192-mjlsj5f0rqc3a50h4lthkm5pcl6ntbgo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
