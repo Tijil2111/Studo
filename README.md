@@ -1,6 +1,6 @@
-# studo
+# Studo
 
-A new Flutter project.
+Are you a student ? If yes then read ahead maybe this app helps you.s :)
 
 ## Getting Started
 
