@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studo/models/user.dart';
 import 'package:studo/screens/authenticate/register.dart';
 import 'package:studo/screens/authenticate/sign_in.dart';
+import 'package:studo/screens/home/home.dart';
 import 'package:studo/screens/wrapper.dart';
 import 'package:studo/services/auth.dart';
 
@@ -13,12 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
-      value: AuthService().user,
+      value: AuthService().Myuser,
       child: MaterialApp(
         home: Wrapper(),
         routes: {
           '/login': (context) => SignIn(),
           '/register': (context) => Register(),
+          '/home': (context) => Home(),
         },
         debugShowCheckedModeBanner: false,
       ),

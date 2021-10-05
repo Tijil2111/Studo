@@ -26,45 +26,24 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.blueAccent[100],
-              elevation: 0.0,
-              title: Text(
-                'Sign up to Studo',
-                style: TextStyle(color: Colors.black),
-              ),
-              actions: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.person),
-                  label: Text('Sign In'),
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/login'),
-                ),
-              ],
-            ),
-            body: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Colors.blue,
-                      Colors.red,
-                    ],
-                  ),
-                ),
+            body: SingleChildScrollView(
+              child: Center(
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                  padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
                   child: Form(
                     key: _formKey,
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 20.0),
+                        SizedBox(height: 30.0),
+                        CircleAvatar(
+                          backgroundImage: AssetImage('assets/register.png'),
+                          backgroundColor: Colors.transparent,
+                          radius: 150,
+                        ),
+
                         TextFormField(
                           decoration:
-                              textInputDecoration.copyWith(hintText: 'email'),
+                              textInputDecoration.copyWith(hintText: 'Email'),
                           validator: (val) =>
                               val.isEmpty ? 'Enter an email' : null,
                           onChanged: (val) {
@@ -73,8 +52,8 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: 20.0),
                         TextFormField(
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'password'),
+                          decoration:
+                              textInputDecoration.copyWith(hintText: 'Password'),
                           obscureText: true,
                           validator: (val) => val.length < 6
                               ? 'Enter a password 6+ chars long'
@@ -85,7 +64,7 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: 20.0),
                         RaisedButton(
-                            color: Colors.pink[400],
+                            color: Colors.purple,
                             child: Text(
                               'Register',
                               style: TextStyle(color: Colors.white),
@@ -108,7 +87,17 @@ class _RegisterState extends State<Register> {
                         Text(
                           error,
                           style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        )
+                        ),
+                        SizedBox(height: 5,),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushReplacementNamed(context, '/login');
+                          },
+                            child: Text('Already a member ? Login',
+                              style: TextStyle(color: Colors.purple
+                              ),
+                            ),
+                        ),
                       ],
                     ),
                   ),

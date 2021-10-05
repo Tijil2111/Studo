@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:studo/screens/home/home.dart';
 import 'package:studo/services/auth.dart';
 import 'package:studo/shared/constants.dart';
 import 'package:studo/shared/loading.dart';
@@ -16,7 +18,7 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
-
+  bool home = false;
   // text field state
   String email = '';
   String password = '';
@@ -26,34 +28,8 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.brown[100],
-            appBar: AppBar(
-              backgroundColor: Colors.blueAccent[100],
-              elevation: 0.0,
-              title: Text(
-                'Sign in to Studo',
-                style: TextStyle(color: Colors.black),
-              ),
-              actions: <Widget>[
-                FlatButton.icon(
-                  icon: Icon(Icons.person),
-                  label: Text('Register'),
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/register'),
-                ),
-              ],
-            ),
-            body: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Colors.blue,
-                    Colors.red,
-                  ],
-                )),
+            body: SingleChildScrollView(
+              child: Center(
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -61,10 +37,16 @@ class _SignInState extends State<SignIn> {
                     key: _formKey,
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 20.0),
+                        SizedBox(height: 30.0),
+                        CircleAvatar(
+                          backgroundImage: AssetImage('assets/login.png'),
+                          backgroundColor: Colors.transparent,
+                          radius: 150,
+                        ),
                         TextFormField(
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'Email'),
+                          decoration: textInputDecoration.copyWith(
+                              hintText: 'Email',
+                              hintStyle: TextStyle(color: Colors.purple)),
                           validator: (val) =>
                               val.isEmpty ? 'Enter an email' : null,
                           onChanged: (val) {
@@ -75,7 +57,8 @@ class _SignInState extends State<SignIn> {
                         TextFormField(
                           obscureText: true,
                           decoration: textInputDecoration.copyWith(
-                              hintText: 'Password'),
+                              hintText: 'Password',
+                              hintStyle: TextStyle(color: Colors.purple)),
                           validator: (val) => val.length < 6
                               ? 'Enter a password 6+ chars long'
                               : null,
@@ -85,9 +68,9 @@ class _SignInState extends State<SignIn> {
                         ),
                         SizedBox(height: 20.0),
                         RaisedButton(
-                            color: Colors.pink[400],
+                            color: Colors.purple,
                             child: Text(
-                              'Sign In',
+                              'Login',
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () async {
@@ -95,12 +78,22 @@ class _SignInState extends State<SignIn> {
                                 setState(() => loading = true);
                                 dynamic result =
                                     await _auth.signInWithEmailAndPassword(
-                                        email, password);
+                                  email,
+                                  password,
+                                );
+                                try {
+                                  if (result.user) {
+                                    return Home();
+                                  }
+                                } catch (e) {
+                                  print(e.toString());
+                                }
+
                                 if (result == null) {
                                   setState(() {
-                                    loading = false;
                                     error =
                                         'Could not sign in with those credentials';
+                                    loading = false;
                                   });
                                 }
                               }
@@ -110,11 +103,22 @@ class _SignInState extends State<SignIn> {
                           error,
                           style: TextStyle(color: Colors.red, fontSize: 14.0),
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/register');
+                          },
+                          child: Text(
+                            'Dont have an acoount Sign Up',
+                            style: TextStyle(color: Colors.purple),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-            ));
+            ),
+          );
   }
 }
