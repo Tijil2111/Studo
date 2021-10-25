@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   PageController pageController = PageController();
   int _selectedIndex = 0;
 
-  checkAuthentification() async {
+  checkAuthentication() async {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
         Navigator.of(context).pushReplacementNamed("start");
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    this.checkAuthentification();
+    this.checkAuthentication();
     this.getUser();
   }
 
